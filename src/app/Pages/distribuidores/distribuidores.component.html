@@ -1,0 +1,112 @@
+<!-- <h3 *ngIf="usuario.rol!='admin'" style="text-align: center; ">Necesitas una cuenta de admin para esta pagina!!</h3> -->
+
+<!-- <div *ngIf="usuario.rol=='admin'"> -->
+<div>
+    <!-- cambiar -->
+    <div style="text-align: center; margin: 3rem;">
+        <button style="margin-bottom: 1.5rem;" type="button" class="btn btn-primary" (click)="nuevo(content)">Añadir
+            Nuevo Proveedor</button>
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-primary">
+                    <th>Empresa</th>
+                    <th>RFC</th>
+                    <th>Nombre</th>
+                    <!-- <th>Apellidos</th> -->
+                    <th>Telefono</th>
+                    <!-- <th>Calle</th>
+                    <th>Colonia</th>
+                    <th>Municipio</th> -->
+                    <th>Direccion</th>
+                    <th>Operiaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-dark" *ngFor="let item of collection.data">
+                    <td>{{item.empresa}}</td>
+                    <td>{{item.rfc}}</td>
+                    <td style="text-transform: capitalize;">{{item.nom_prov}} {{item.app_prov}}</td>
+                    <!-- <td></td> -->
+                    <td>{{item.telefono}}</td>
+                    <td style="text-transform: capitalize;">{{item.calle}}, {{item.colonia}}, {{item.municipio}}, {{item.ciudad}}</td>
+                    <!-- <td>{{item.colonia}}</td>
+                    <td>{{item.municipio}}</td>
+                    <td>{{item.ciudad}}</td> -->
+                    <td>
+                        <button type="button" class="btn btn-danger" style="margin-right: 1rem;"
+                            (click)="eliminar(item)">Eliminar</button>
+                        <button type="button" class="btn btn-primary" (click)="editar(content,item)">Editar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+        <!-- Todo esto es el html del Modal (ventana emergente) -->
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Crear/Actualizar Proveedor</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <form [formGroup]="proveedorForm">
+                            <div class="form-group">
+                                <strong><label style="text-transform: capitalize;">empresa</label></strong>
+                                <input type="text" formControlName="empresa" class="form-control">
+
+                            </div>
+                            <div class="form-group">
+                                <strong><label>RFC</label></strong>
+                                <input type="text" formControlName="rfc" class="form-control">
+
+                            </div>
+                            <div class="form-group">
+                                <strong><label style="text-transform: capitalize;">Nombre</label></strong>
+                                <input type="text" formControlName="nom_prov" class="form-control">
+                                <strong><label style="text-transform: capitalize;">Apellidos</label></strong>
+                                <input type="text" formControlName="app_prov" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <strong><label style="text-transform: capitalize;">telefono</label></strong>
+                                <input type="text" formControlName="telefono" class="form-control">
+
+                            </div>
+                            <div class="form-group">
+                                <strong><label style="text-transform: capitalize;">calle</label></strong>
+                                <input type="text" formControlName="calle" class="form-control">
+
+                            </div>
+                            <div class="form-group">
+                                <strong><label style="text-transform: capitalize;">colonia</label></strong>
+                                <input type="text" formControlName="colonia" class="form-control">
+
+                            </div>
+                            <div class="form-group">
+                                <strong><label style="text-transform: capitalize;">municipio</label></strong>
+                                <input type="text" formControlName="municipio" class="form-control">
+
+                            </div>
+                            <div class="form-group">
+                                <strong><label style="text-transform: capitalize;">ciudad</label></strong>
+                                <input type="text" formControlName="ciudad" class="form-control">
+
+                            </div>
+
+                        </form>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="updSave==false" type="button" class="btn btn-success"
+                    (click)="guardarProveedor()">Guardar</button>
+                <button *ngIf="updSave==true" type="button" class="btn btn-info"
+                    (click)="actualizarProveedor()">Actualizar</button>
+            </div>
+        </ng-template>
+    </div>
+</div>

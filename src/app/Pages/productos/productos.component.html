@@ -1,0 +1,79 @@
+<!-- <h3 *ngIf="usuario.rol!='admin'" style="text-align: center; ">Necesitas una cuenta de admin para esta pagina!!</h3> -->
+
+<!-- <div *ngIf="usuario.rol=='admin'"> -->
+<div>
+    <!-- cambiar -->
+    <div style="text-align: center; margin: 3rem;">
+        <button style="margin-bottom: 1.5rem;" type="button" class="btn btn-primary" (click)="nuevo(content)">Añadir
+            Nuevo Producto</button>
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-primary">
+                    <th>Proveedor</th>
+                    <th>Producto</th>
+                    <th>Costo</th>
+                    <th>Stock</th>
+                    <th>Operiaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-dark" *ngFor="let item of collection.data">
+                    <td>{{item.proveedor}}</td>
+                    <td>{{item.producto}}</td>
+                    <td>${{item.costo|number}}</td>
+                    <td>{{item.stock|number}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" style="margin-right: 1rem;"
+                            (click)="eliminar(item)">Eliminar</button>
+                        <button type="button" class="btn btn-primary" (click)="editar(content,item)">Editar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+        <!-- Todo esto es el html del Modal (ventana emergente) -->
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Crear/Actualizar Producto</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <form [formGroup]="productoForm">
+                            <div class="form-group">
+                                <strong><label for="">Proveedor</label></strong>
+                                <input type="text" formControlName="proveedor" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <strong><label for="">Producto</label></strong>
+                                <input type="text" formControlName="producto" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <strong><label for="">Costo</label></strong>
+                                <input type="number" formControlName="costo" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <strong><label for="">Stock</label></strong>
+                                <input type="number" formControlName="stock" class="form-control">
+                            </div>
+
+                        </form>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="updSave==false" type="button" class="btn btn-success"
+                    (click)="guardarProducto()">Guardar</button>
+                <button *ngIf="updSave==true" type="button" class="btn btn-info"
+                    (click)="actualizarProducto()">Actualizar</button>
+            </div>
+        </ng-template>
+    </div>
+</div>

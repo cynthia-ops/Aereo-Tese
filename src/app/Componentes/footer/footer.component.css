@@ -1,0 +1,15 @@
+ul{
+    list-style: none;
+    /* display: flex;
+    flex-direction: column; */
+    
+    /* justify-content: center; */
+    margin: 0;
+    padding: 0;
+}
+
+.direccion{
+    padding: 10px 0px 0px;
+    text-align: center;
+    margin: 0;
+}

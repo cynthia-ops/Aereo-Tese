@@ -1,0 +1,17 @@
+<div class="row container-lg-fluid mb-5" style="margin:0;">
+    <div class="col-md-2" style="margin-left: 3em; max-height: 23rem;" *ngFor="let item of data; let i=index">
+        <div>
+            <div class="card border-0" style="color:black; width: 15rem; height: 25rem;">
+                <a type="button" class="" (click)="verMochila(item)">
+                    <img class="card-img-top" [src]="item.url" style="width: 15rem; height: 15rem;">
+                </a>
+                <div class="card-body" style="text-align: center;">
+                    <p style="height: 60px; overflow-y: hidden;" class="card-text"
+                        style="text-transform: capitalize; font-family: Gotham-Bold',Arial,sans-serif;">
+                        {{item.descripcion}} por: <strong>$ {{item.precio|number}}</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
